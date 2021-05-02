@@ -1,9 +1,6 @@
-import 'dart:math';
 import 'dart:typed_data';
 import 'dart:core';
 import 'dart:convert';
-
-import 'package:binary_codec/binary_codec.dart';
 
 String encrypt(String texto) {
   var textoEmInteger = utf8.encode(texto);
@@ -12,32 +9,46 @@ String encrypt(String texto) {
   var encriptedText = '';
 
   for (String binario in valoresBinarios) {
+    var contador = 0;
     var polaridade = '+';
+    var charEmBinario = '';
     for (var char = 0; char < binario.length; char++) {
-      binario[char];
       if (binario[char] == '0') {
-        encriptedText += '0';
+        charEmBinario += '0';
       } else {
-        encriptedText += polaridade;
+        charEmBinario += polaridade;
         polaridade = polarityChange(polaridade);
       }
+      contador++;
     }
+    if (contador < 8) {
+      while (contador < 8) {
+        charEmBinario = '0' + charEmBinario;
+        contador++;
+      }
+    }
+    encriptedText += charEmBinario;
   }
-  // var textoDecodificado = encriptedText.replaceAll('+', '1');
-  // textoDecodificado = textoDecodificado.replaceAll('-', '1');
-  // List<int> list = textoDecodificado.codeUnits;
-  // Uint8List bytes = Uint8List.fromList(list);
-  // if (texto.toString() != textoDecoficado.toString()) {
-  //   /// They should be the same;
-  //   throw new Exception('this shit does not work at all');
-  // }
   return encriptedText;
 }
 
 String decryptAmi(String textoCodificado) {
   var textoDecodificado = textoCodificado.replaceAll('+', '1');
   textoDecodificado = textoDecodificado.replaceAll('-', '1');
-  return textoDecodificado;
+  // o que eu preciso, inserir numa lista os bytes a cada 8 caracteres
+  List<int> list = [];
+  var valorBinario = '';
+
+  for (var i = 1; i <= textoDecodificado.length; i++) {
+    valorBinario += textoDecodificado[i - 1];
+    if (i % 8 == 0 && i != 0) {
+      list.add(int.parse(valorBinario, radix: 2));
+      valorBinario = '';
+    }
+  }
+  Uint8List bytes = Uint8List.fromList(list);
+
+  return utf8.decode(bytes).toString();
 }
 
 String polarityChange(String polaridade) {

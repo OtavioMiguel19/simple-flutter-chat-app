@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
         title: Text('Fala maluco'),
       ),
       body: Container(
-        child: Text(encrypt('ã')),
+        child: Text(encrypt('Pããõó de batãtanmofimjpd,hk~´.[]dszf,´dhmgnõç')),
       ),
     );
   }
