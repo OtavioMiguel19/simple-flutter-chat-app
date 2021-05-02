@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ami/ami.dart';
+import 'package:graphic/graphic.dart' as graphic;
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,7 +15,9 @@ class _HomePageState extends State<HomePage> {
         title: Text('Fala maluco'),
       ),
       body: Container(
-        child: Text(encrypt('Pããõó de batãtanmofimjpd,hk~´.[]dszf,´dhmgnõç')),
+        width: double.infinity,
+        height: double.infinity,
+        child: graphicShow(encrypt('textoCodificado')),
       ),
     );
   }
