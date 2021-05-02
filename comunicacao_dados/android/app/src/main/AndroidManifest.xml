@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.edu.utfpr.dainf.comunicacao_dados">
    <application
-        android:label="comunicacao_dados"
+        android:label="Saudades Djalma"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

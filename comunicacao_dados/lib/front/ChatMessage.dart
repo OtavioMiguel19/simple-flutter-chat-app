@@ -31,7 +31,7 @@ class ChatMessage extends StatelessWidget {
         margin: EdgeInsets.zero,
         elevation: 0.0,
         color:
-            _isThisUserMessage ? Colors.blueAccent[100] : Colors.redAccent[100],
+            _isThisUserMessage ? Colors.blue[100] : Colors.red[100],
         shape: RoundedRectangleBorder(
             borderRadius:
                 _isThisUserMessage ? _cardRadiusSender : _cardRadiusReceiver),
@@ -116,11 +116,8 @@ class ChatMessage extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Binário da mensagem"),
-              content: ListView(
-                children: [
-                  Text(mensagem.binarios.toString()),
-                ],
-              ),
+              content: SingleChildScrollView(
+                  child: Text(mensagem.binarios.toString())),
             ));
   }
 
@@ -129,11 +126,8 @@ class ChatMessage extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Mensagem criptografada"),
-              content: ListView(
-                children: [
-                  Text(mensagem.mensagemCriptografada),
-                ],
-              ),
+              content: SingleChildScrollView(
+                  child: Text(mensagem.mensagemCriptografada)),
             ));
   }
 }
