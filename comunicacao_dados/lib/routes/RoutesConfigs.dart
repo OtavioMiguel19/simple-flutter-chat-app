@@ -3,9 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class RoutesConfigs {
   static String calculateRoute() {
-    if (FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser.uid == null || FirebaseAuth.instance.currentUser.uid.isEmpty) {
+    if (FirebaseAuth.instance.currentUser == null ||
+        FirebaseAuth.instance.currentUser.uid == null ||
+        FirebaseAuth.instance.currentUser.uid.isEmpty) {
       return AppRoutesEnum.login;
     }
-    return '';
-  } 
+    if (!FirebaseAuth.instance.currentUser.emailVerified) {
+      return AppRoutesEnum.verify;
+    }
+    return AppRoutesEnum.home;
+  }
 }

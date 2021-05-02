@@ -1,34 +1,25 @@
 import 'package:comunicacao_dados/pages/HomePage.dart';
+import 'package:comunicacao_dados/pages/LoginPage.dart';
+import 'package:comunicacao_dados/pages/SplashPage.dart';
+import 'package:comunicacao_dados/pages/VerifyPage.dart';
 import 'package:comunicacao_dados/routes/AppRoutesEnum.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      initialRoute: AppRoutesEnum.main,
-      routes: routes,
-      title: 'Chatroom',
-    )
-  );
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    initialRoute: AppRoutesEnum.main,
+    routes: routes,
+    title: 'Chatroom',
+    theme: ThemeData(
+      fontFamily: 'Texto'
+    ),
+  ));
 }
-
-class Main extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    _runStartSettings();
-    return Container();
-  }
-
-  void _runStartSettings() async {
-    await Firebase.initializeApp();
-  }
-}
-
 
 Map<String, Widget Function(BuildContext)> routes = {
-    AppRoutesEnum.main: (context) => HomePage(),
-    // AppRoutesEnum.home: (context) => Home(),
-    // AppRoutesEnum.login: (context) => LoginPage(),
-    // AppRoutesEnum.verify: (context) => VerifyPage(),
-  };
+  AppRoutesEnum.main: (context) => SplashPage(),
+  AppRoutesEnum.home: (context) => HomePage(),
+  AppRoutesEnum.login: (context) => LoginPage(),
+  AppRoutesEnum.verify: (context) => VerifyPage(),
+};
