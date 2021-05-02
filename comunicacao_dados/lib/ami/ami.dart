@@ -87,16 +87,16 @@ String polarityChange(String polaridade) {
 }
 
 graphic.Chart graphicShow(String textoCodificado) {
-  var valorBinario = '';
   var list = [];
+
   for (var i = 1; i <= textoCodificado.length; i++) {
-    list.add({'byte': i.toString(), 'value': textoCodificado[i - 1]});
+    list.add({'byte': i, 'value': textoCodificado[i - 1]});
   }
   var grafico = graphic.Chart(
     data: list,
     scales: {
-      'byte': graphic.CatScale(
-        accessor: (map) => map['byte'] as String,
+      'byte': graphic.LinearScale(
+        accessor: (map) => map['byte'] as num,
       ),
       'value': graphic.CatScale(
         accessor: (map) => map['value'] as String,
