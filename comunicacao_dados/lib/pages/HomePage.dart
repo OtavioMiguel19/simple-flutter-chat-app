@@ -130,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                               BorderSide(color: Colors.greenAccent[100]),
                         ),
                         hintText: 'Digite uma mensagem'),
+                        textCapitalization: TextCapitalization.sentences,
                   )),
                   IconButton(
                     icon: Icon(
