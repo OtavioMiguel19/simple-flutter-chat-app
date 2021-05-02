@@ -1,18 +1,53 @@
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:core';
+import 'dart:convert';
 
 import 'package:binary_codec/binary_codec.dart';
 
 String encrypt(String texto) {
-  var textoEmBinario = binaryCodec.encode(texto);
-  var textoDecoficado = binaryCodec.decode(textoEmBinario);
-  if (texto.toString() != textoDecoficado.toString()) {
-    /// They should be the same;
-    throw new Exception('this shit does not work at all');
+  var textoEmInteger = utf8.encode(texto);
+  List<String> valoresBinarios =
+      textoEmInteger.map((int strInt) => strInt.toRadixString(2)).toList();
+  var encriptedText = '';
+
+  for (String binario in valoresBinarios) {
+    var polaridade = '+';
+    for (var char = 0; char < binario.length; char++) {
+      binario[char];
+      if (binario[char] == '0') {
+        encriptedText += '0';
+      } else {
+        encriptedText += polaridade;
+        polaridade = polarityChange(polaridade);
+      }
+    }
   }
+  // var textoDecodificado = encriptedText.replaceAll('+', '1');
+  // textoDecodificado = textoDecodificado.replaceAll('-', '1');
+  // List<int> list = textoDecodificado.codeUnits;
+  // Uint8List bytes = Uint8List.fromList(list);
+  // if (texto.toString() != textoDecoficado.toString()) {
+  //   /// They should be the same;
+  //   throw new Exception('this shit does not work at all');
+  // }
+  return encriptedText;
 }
 
+String decryptAmi(String textoCodificado) {
+  var textoDecodificado = textoCodificado.replaceAll('+', '1');
+  textoDecodificado = textoDecodificado.replaceAll('-', '1');
+  return textoDecodificado;
+}
+
+String polarityChange(String polaridade) {
+  if (polaridade == '+') {
+    polaridade = '-';
+  } else {
+    polaridade = '+';
+  }
+  return polaridade;
+}
 // def encrypt(str):
 //     byte_list = []
 //     for i in str:
