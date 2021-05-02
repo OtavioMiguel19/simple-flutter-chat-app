@@ -108,15 +108,6 @@ class ChatMessage extends StatelessWidget {
   }
 
   void _showBinary(BuildContext context) {
-
-    Map<String, Axis> axis;
-    axis.map((key, value) => {
-      'aa': Axis.horizontal,
-      'ab': Axis.horizontal,
-      'ac': Axis.horizontal
-    });
-
-
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
