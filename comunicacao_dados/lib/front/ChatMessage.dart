@@ -1,4 +1,5 @@
 import 'package:comunicacao_dados/models/Mensagem.dart';
+import 'package:comunicacao_dados/pages/GraficoPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -31,6 +32,9 @@ class ChatMessage extends StatelessWidget {
             borderRadius:
                 _isThisUserMessage ? _cardRadiusSender : _cardRadiusReceiver),
         child: ListTile(
+          onLongPress: () {
+            _showBottomSheet(context);
+          },
           isThreeLine: true,
           title: Text(
             mensagem.mensagemTexto,
@@ -44,7 +48,11 @@ class ChatMessage extends StatelessWidget {
             children: [
               Text(
                 mensagem.donoNome,
-                style: TextStyle(color: Colors.black, fontSize: 13.0, fontFamily: 'Titulo', fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 13.0,
+                    fontFamily: 'Titulo',
+                    fontWeight: FontWeight.bold),
                 textAlign: _isThisUserMessage ? TextAlign.end : TextAlign.start,
               ),
               Text(
@@ -57,5 +65,72 @@ class ChatMessage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                topRight: Radius.circular(15.0))),
+        context: context,
+        builder: (BuildContext bc) {
+          return Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Wrap(
+                children: <Widget>[
+                  ListTile(
+                      leading: new Icon(Icons.bar_chart_rounded),
+                      title: new Text('Ver gráfico'),
+                      onTap: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        GraficoPage(mensagem)))
+                          }),
+                  ListTile(
+                    leading: new Icon(Icons.looks_one_outlined),
+                    title: new Text('Ver binário'),
+                    onTap: () => {_showBinary(context)},
+                  ),
+                  ListTile(
+                    leading: new Icon(Icons.security),
+                    title: new Text('Ver mensagem criptografada'),
+                    onTap: () => {_showMensagemCriptografada(context)},
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  void _showBinary(BuildContext context) {
+
+    Map<String, Axis> axis;
+    axis.map((key, value) => {
+      'aa': Axis.horizontal,
+      'ab': Axis.horizontal,
+      'ac': Axis.horizontal
+    });
+
+
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Binário da mensagem"),
+              content: Text('0010010'),
+            ));
+  }
+
+  void _showMensagemCriptografada(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text("Mensagem criptografada"),
+              content: Text('tAdIfIcIlDeLeR'),
+            ));
   }
 }

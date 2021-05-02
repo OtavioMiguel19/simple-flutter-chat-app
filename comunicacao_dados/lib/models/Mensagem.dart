@@ -30,7 +30,6 @@ class Mensagem {
     Map<String, dynamic> map = Map();
     map['dono'] = dono;
     map['donoNome'] = donoNome;
-    map['binarios'] = binarios;
     map['mensagemTexto'] = mensagemTexto;
     map['mensagemCriptografada'] = mensagemCriptografada;
     map['horario'] = horario;
