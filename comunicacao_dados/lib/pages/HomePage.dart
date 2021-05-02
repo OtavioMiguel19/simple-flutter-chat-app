@@ -1,3 +1,4 @@
+import 'package:comunicacao_dados/ami/ami.dart';
 import 'package:comunicacao_dados/front/ChatMessage.dart';
 import 'package:comunicacao_dados/models/Mensagem.dart';
 import 'package:comunicacao_dados/routes/RoutesConfigs.dart';
@@ -28,9 +29,9 @@ class _HomePageState extends State<HomePage> {
     void _enviarMensagem() {
       if (_controller.text != null && _controller.text.isNotEmpty) {
         Mensagem mensagem = Mensagem();
-        mensagem.mensagemTexto = _controller.text;
-        mensagem.dono = _user.uid;
-        mensagem.donoNome = _user.displayName;
+        mensagem.mensagemCriptografada = encrypt(_controller.text);
+        mensagem.dono = encrypt(_user.uid);
+        mensagem.donoNome = encrypt(_user.displayName);
         mensagem.horario = DateTime.now();
 
         mensagens.add(mensagem.toMap());

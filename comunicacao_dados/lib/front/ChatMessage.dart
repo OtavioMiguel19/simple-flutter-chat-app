@@ -13,16 +13,20 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BorderRadiusGeometry _cardRadiusSender = BorderRadius.only(
-        topLeft: Radius.circular(15.0), bottomLeft: Radius.circular(15.0));
+        topLeft: Radius.circular(15.0),
+        bottomLeft: Radius.circular(15.0),
+        bottomRight: Radius.circular(15.0));
     BorderRadiusGeometry _cardRadiusReceiver = BorderRadius.only(
-        topRight: Radius.circular(15.0), bottomRight: Radius.circular(15.0));
+        topRight: Radius.circular(15.0),
+        bottomRight: Radius.circular(15.0),
+        bottomLeft: Radius.circular(15.0));
     bool _isThisUserMessage = mensagem.dono == user.uid;
     double _spacer = MediaQuery.of(context).size.width / 4;
     return Padding(
       padding: EdgeInsets.only(
           top: 10.0,
-          right: _isThisUserMessage ? 0.0 : _spacer,
-          left: _isThisUserMessage ? _spacer : 0.0),
+          right: _isThisUserMessage ? 8.0 : _spacer,
+          left: _isThisUserMessage ? _spacer : 8.0),
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0.0,
@@ -112,7 +116,11 @@ class ChatMessage extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Binário da mensagem"),
-              content: Text('0010010'),
+              content: ListView(
+                children: [
+                  Text(mensagem.binarios.toString()),
+                ],
+              ),
             ));
   }
 
@@ -121,7 +129,11 @@ class ChatMessage extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Mensagem criptografada"),
-              content: Text('tAdIfIcIlDeLeR'),
+              content: ListView(
+                children: [
+                  Text(mensagem.mensagemCriptografada),
+                ],
+              ),
             ));
   }
 }

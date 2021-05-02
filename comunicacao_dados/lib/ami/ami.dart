@@ -40,22 +40,25 @@ List<String> retornaBinariosEncriptado(String texto) {
   return valoresBinarios;
 }
 
-List<int> retornaBinariosDescrypt(String textoCodificado) {
+List<String> retornaBinariosDescrypt(String textoCodificado) {
   var textoDecodificado = textoCodificado.replaceAll('+', '1');
   textoDecodificado = textoDecodificado.replaceAll('-', '1');
   // o que eu preciso, inserir numa lista os bytes a cada 8 caracteres
   List<int> list = [];
+  List<String> list2 = [];
   var valorBinario = '';
 
   for (var i = 1; i <= textoDecodificado.length; i++) {
     valorBinario += textoDecodificado[i - 1];
     if (i % 8 == 0 && i != 0) {
       list.add(int.parse(valorBinario, radix: 2));
+      list2.add(valorBinario);
       valorBinario = '';
     }
   }
-  Uint8List bytes = Uint8List.fromList(list);
-  return bytes;
+  // Uint8List bytes = Uint8List.fromList(list);
+  // return bytes;
+  return list2;
 }
 
 String decryptAmi(String textoCodificado) {

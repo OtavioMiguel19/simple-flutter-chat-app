@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:comunicacao_dados/ami/ami.dart';
 
 class Mensagem {
   String dono;
@@ -19,10 +20,10 @@ class Mensagem {
       this.reference});
 
   Mensagem.fromMap(Map<String, dynamic> map, {this.reference})
-      : dono = map['dono'],
-        donoNome = map['donoNome'],
-        binarios = map['binarios'],
-        mensagemTexto = map['mensagemTexto'],
+      : dono = decryptAmi(map['dono']),
+        donoNome = decryptAmi(map['donoNome']),
+        binarios = retornaBinariosDescrypt(map['mensagemCriptografada']),
+        mensagemTexto = decryptAmi(map['mensagemCriptografada']),
         mensagemCriptografada = map['mensagemCriptografada'],
         horario = (map['horario'] as Timestamp).toDate();
 
@@ -30,7 +31,6 @@ class Mensagem {
     Map<String, dynamic> map = Map();
     map['dono'] = dono;
     map['donoNome'] = donoNome;
-    map['mensagemTexto'] = mensagemTexto;
     map['mensagemCriptografada'] = mensagemCriptografada;
     map['horario'] = horario;
     return map;
