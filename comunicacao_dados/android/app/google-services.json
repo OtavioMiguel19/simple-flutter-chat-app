@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "708672859029",
+    "project_id": "comunicacao-dados-sddsdjalma",
+    "storage_bucket": "comunicacao-dados-sddsdjalma.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708672859029:android:bdfd49e146760f665aa49c",
+        "android_client_info": {
+          "package_name": "br.edu.utfpr.dainf.comunicacao_dados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708672859029-b81hb38utldfdda81j4s9kd0960dltro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAmH3YwUmSkX1PeHCw-7xbk3PHIAx0lfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708672859029-b81hb38utldfdda81j4s9kd0960dltro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
