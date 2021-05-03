@@ -24,27 +24,28 @@ class _HomePageState extends State<HomePage> {
 
   List<Mensagem> msgs = List<Mensagem>.empty(growable: true);
 
+  void _checkIfHasMessageToSend(String text) {
+    setState(() {
+      _hasMessageToSend = text != null && text.isNotEmpty;
+    });
+  }
+
+  void _enviarMensagem() {
+    if (_controller.text != null && _controller.text.isNotEmpty) {
+      Mensagem mensagem = Mensagem();
+      mensagem.mensagemCriptografada = encrypt(_controller.text);
+      mensagem.dono = encrypt(_user.uid);
+      mensagem.donoNome = encrypt(_user.displayName);
+      mensagem.horario = DateTime.now();
+
+      mensagens.add(mensagem.toMap());
+      _controller.clear();
+      _checkIfHasMessageToSend(null);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _enviarMensagem() {
-      if (_controller.text != null && _controller.text.isNotEmpty) {
-        Mensagem mensagem = Mensagem();
-        mensagem.mensagemCriptografada = encrypt(_controller.text);
-        mensagem.dono = encrypt(_user.uid);
-        mensagem.donoNome = encrypt(_user.displayName);
-        mensagem.horario = DateTime.now();
-
-        mensagens.add(mensagem.toMap());
-        _controller.clear();
-      }
-    }
-
-    void _checkIfHasMessageToSend(String text) {
-      setState(() {
-        _hasMessageToSend = text != null && text.isNotEmpty;
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
@@ -130,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                               BorderSide(color: Colors.greenAccent[100]),
                         ),
                         hintText: 'Digite uma mensagem'),
-                        textCapitalization: TextCapitalization.sentences,
+                    textCapitalization: TextCapitalization.sentences,
                   )),
                   IconButton(
                     icon: Icon(
